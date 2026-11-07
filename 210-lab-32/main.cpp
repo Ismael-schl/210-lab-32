@@ -15,8 +15,16 @@ int main() {
     srand(time(0));
     deque<Car> myDeque(SIZE);
 
+    //Populates the que initially
     for (int i = 0; i < SIZE; i++) {
         myDeque.push_back(Car());
+    }
+    
+    //Outputs the initial que
+    cout << "Initial que: " << endl;
+    for (int i = 0; i < SIZE; i++) {
+        cout << "    ";
+        myDeque[i].print();
     }
 
     simulate(myDeque);
@@ -24,33 +32,32 @@ int main() {
     return 0;
 }
 
+//This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
 void simulate(deque<Car> &deq) {
     int count = 1;
     while (!deq.empty()) {
         int r = rand() % 100;
         //55% case
         if (r < 55) {
-            cout << "Time: " << count << " Operation: Car paid: ";
+            cout << endl << "Time: " << count << " Operation: Car paid: ";
             deq.front().print();
             deq.pop_front();
-            cout << endl << "Queue: " << endl;
+            cout << "Queue: " << endl;
             for (int i = 0; i < deq.size(); i++) {
                 cout << "    ";
                 deq[i].print();
-                cout << endl;
             }
 
         }
         //45% case
         else {
-            cout << "Time: " << count << " Operation: Joined lane: ";
+            cout << endl << "Time: " << count << " Operation: Joined lane: ";
             deq.push_back(Car());
             deq.back().print();
-            cout << endl << "Queue: " << endl;
+            cout << "Queue: " << endl;
             for (int i = 0; i < deq.size(); i++) {
                 cout << "    ";
                 deq[i].print();
-                cout << endl;
             }
         }
     count++;
