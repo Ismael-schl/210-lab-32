@@ -9,18 +9,17 @@ using namespace std;
 
 const int SIZE = 2;
 
-void simulate(deque<int> &deq);
+void simulate(deque<Car> &deq);
 
 int main() {
     srand(time(0));
-    deque<Car> myDeque;
+    deque<Car> myDeque(SIZE);
 
     for (int i = 0; i < SIZE; i++) {
         myDeque.push_back(Car());
     }
 
-    myDeque.back().print();
-    myDeque.front().print();
+    simulate(myDeque);
     
     return 0;
 }
@@ -33,12 +32,28 @@ void simulate(deque<Car> &deq) {
         if (r < 55) {
             cout << "Time: " << count << " Operation: Car paid: ";
             deq.front().print();
-            cout << endl << "Queue: "
+            deq.pop_front();
+            cout << endl << "Queue: " << endl;
+            for (int i = 0; i < deq.size(); i++) {
+                cout << "    ";
+                deq[i].print();
+                cout << endl;
+            }
+
         }
         //45% case
         else {
-
+            cout << "Time: " << count << " Operation: Joined lane: ";
+            deq.push_back(Car());
+            deq.back().print();
+            cout << endl << "Queue: " << endl;
+            for (int i = 0; i < deq.size(); i++) {
+                cout << "    ";
+                deq[i].print();
+                cout << endl;
+            }
         }
     count++;
     }
+    cout << "    " << "Empty" << endl;
 }
