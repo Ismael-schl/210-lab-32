@@ -13,7 +13,7 @@ void simulate(deque<Car> &deq);
 
 int main() {
     srand(time(0));
-    deque<Car> myDeque(SIZE);
+    deque<Car> myDeque;
 
     //Populates the que initially
     for (int i = 0; i < SIZE; i++) {
