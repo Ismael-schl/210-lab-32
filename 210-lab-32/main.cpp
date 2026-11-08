@@ -10,8 +10,7 @@ using namespace std;
 const int SIZE = 2;
 const int LANESIZE = 4;
 
-const int PROBPAID = 46;
-const int PROBJOIN = 39;
+const int PROBPAID = 50;
 const int PERIODS  = 20;
 
 void simulate(deque<Car> lanes[LANESIZE]);
