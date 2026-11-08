@@ -28,18 +28,22 @@ int main() {
     cout << "Initial queue: " << endl;
     print_lanes(lanes);
    
+    /*
     cout << "Test operations on queue:  " << endl;
     cout << "After taking one car away from every lane: " << endl;
     for (int i = 0; i < LANESIZE; i++) {
         lanes[i].pop_front();
     }
+    
     print_lanes(lanes);
+    */
     return 0;
 }
 
+//This function takes the array of deques and outputs every car. It also considers the empty case.
 void print_lanes(deque<Car> lanes[LANESIZE]) {
     for (int j = 0; j < LANESIZE; j++) {
-        cout << "Lane " << j+1 << ":" << endl;
+        cout << "Lane " << j+1 << " :" << endl;
         if (lanes[j].empty()) {
             cout << "empty" << endl;
         }
