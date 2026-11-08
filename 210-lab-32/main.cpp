@@ -10,7 +10,8 @@ using namespace std;
 const int SIZE = 2;
 const int LANESIZE = 4;
 
-const int PROBPAID = 50;
+const int PROBPAID = 46;
+const int PROBJOIN = 39;
 const int PERIODS  = 20;
 
 void simulate(deque<Car> lanes[LANESIZE]);
@@ -61,7 +62,7 @@ void print_lanes(deque<Car> lanes[LANESIZE]) {
     cout << endl;
 }
 
-//This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
+//This function distributes the probabilbity of either a car paying and leaving or a car joining as 
 void simulate(deque<Car> lanes[LANESIZE]) {
     for (int i = 0; i < PERIODS; i++) {
         int count = i+1;
@@ -75,12 +76,16 @@ void simulate(deque<Car> lanes[LANESIZE]) {
                 lanes[j].front().print();
                 lanes[j].pop_front();
             }
-            else {
+            else if (r < PROBJOIN + PROBPAID) {
                 cout << " Joined: ";
                 lanes[j].push_back(Car());
                 lanes[j].back().print();
-                }
-        } 
+            }
+            else {
+                
+            } 
+        }
+           
         print_lanes(lanes);
     } 
 }
