@@ -63,33 +63,28 @@ void print_lanes(deque<Car> lanes[LANESIZE]) {
 
 //This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
 void simulate(deque<Car> lanes[LANESIZE]) {
-    int count = 1;
+    
     for (int i = 0; i < PERIODS; i++) {
-        int r = rand() % 100;
-        //50% case
-        if (r < PROBPAID) {
-            cout << endl << "Time: " << count << " Operation: Car paid: ";
-            deq.front().print();
-            deq.pop_front();
-            cout << "Queue: " << endl;
-            for (int i = 0; i < deq.size(); i++) {
-                cout << "    ";
-                deq[i].print();
+        int count = i+1;
+        cout << endl << "Time: " << count << endl;
+        for (int j = 0; j < LANESIZE; j++) {
+            int r = rand() % 100;
+            cout << "Lane: " << j+1;
+            if (r < PROBPAID) {
+                cout << "  Paid: ";
+                lanes[j].front().print();
+                lanes[j].pop_front();
             }
+            else {
+                cout << " Joined: ";
+                lanes[j].back().print();
+                
+                }
+        }
 
         }
         //50% case
-        else {
-            cout << endl << "Time: " << count << " Operation: Joined lane: ";
-            deq.push_back(Car());
-            deq.back().print();
-            cout << "Queue: " << endl;
-            for (int i = 0; i < deq.size(); i++) {
-                cout << "    ";
-                deq[i].print();
-            }
-        }
-    count++;
+        
     }
     cout << "    " << "Empty" << endl;
 }
