@@ -13,6 +13,7 @@ const int LANESIZE = 4;
 const int PROPTOT = 100;
 const int PROBPAID = 46;
 const int PROBJOIN = 39;
+const int PROBEMPTY = 50;
 const int PERIODS  = 20;
 
 void simulate(deque<Car> lanes[LANESIZE]);
@@ -72,13 +73,13 @@ void simulate(deque<Car> lanes[LANESIZE]) {
             int r = rand() % PROPTOT;
             cout << "Lane: " << j+1;
             if (lanes[j].empty()) {
-                if (r < 50) {
+                if (r < PROBEMPTY) {
                     cout << " Joined: ";
                     lanes[j].push_back(Car());
                     lanes[j].back().print();
                 }
                 else {
-                    cout << "   Unaffected";
+                    cout << " Unaffected";
                 }
             }
             else {
