@@ -10,7 +10,8 @@ using namespace std;
 const int SIZE = 2;
 const int LANESIZE = 4;
 
-const int PROBPAID = 50;
+const int PROBPAID = 46;
+const int PROBJOIN = 39;
 const int PERIODS  = 20;
 
 void simulate(deque<Car> lanes[LANESIZE]);
@@ -31,7 +32,7 @@ int main() {
     cout << "Initial queue: " << endl;
     print_lanes(lanes);
 
-      
+    simulate(lanes);
     /*
     cout << "Test operations on queue:  " << endl;
     cout << "After taking one car away from every lane: " << endl;
@@ -47,7 +48,7 @@ int main() {
 //This function takes the array of deques and outputs every car. It also considers the empty case.
 void print_lanes(deque<Car> lanes[LANESIZE]) {
     for (int j = 0; j < LANESIZE; j++) {
-        cout << "Lane " << j+1 << " :" << endl;
+        cout << "Lane " << j+1 << " Queue:" << endl;
         if (lanes[j].empty()) {
             cout << "empty" << endl;
         }
@@ -63,28 +64,24 @@ void print_lanes(deque<Car> lanes[LANESIZE]) {
 
 //This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
 void simulate(deque<Car> lanes[LANESIZE]) {
-    
     for (int i = 0; i < PERIODS; i++) {
         int count = i+1;
         cout << endl << "Time: " << count << endl;
         for (int j = 0; j < LANESIZE; j++) {
             int r = rand() % 100;
             cout << "Lane: " << j+1;
-            if (r < PROBPAID) {
-                cout << "  Paid: ";
+            //50 percent chance of payment
+            if (r < PROBPAID && !lanes[j].empty()) {
+                cout << " Paid: ";
                 lanes[j].front().print();
                 lanes[j].pop_front();
             }
             else {
                 cout << " Joined: ";
+                lanes[j].push_back(Car());
                 lanes[j].back().print();
-                
                 }
-        }
-
-        }
-        //50% case
-        
-    }
-    cout << "    " << "Empty" << endl;
+        } 
+        print_lanes(lanes);
+    } 
 }
