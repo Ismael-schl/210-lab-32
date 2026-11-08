@@ -67,7 +67,7 @@ void simulate(deque<Car> lanes[LANESIZE]) {
     for (int i = 0; i < PERIODS; i++) {
         int r = rand() % 100;
         //50% case
-        if (r < 50) {
+        if (r < PROBPAID) {
             cout << endl << "Time: " << count << " Operation: Car paid: ";
             deq.front().print();
             deq.pop_front();
