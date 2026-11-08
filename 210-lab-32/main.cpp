@@ -10,7 +10,10 @@ using namespace std;
 const int SIZE = 2;
 const int LANESIZE = 4;
 
-void simulate(deque<Car> &deq);
+const int PROBPAID = 50;
+const int PERIODS  = 20;
+
+void simulate(deque<Car> lanes[LANESIZE]);
 void print_lanes(deque<Car> lanes[LANESIZE]);
 
 int main() {
@@ -27,7 +30,8 @@ int main() {
     //Outputs the initial que
     cout << "Initial queue: " << endl;
     print_lanes(lanes);
-   
+
+      
     /*
     cout << "Test operations on queue:  " << endl;
     cout << "After taking one car away from every lane: " << endl;
@@ -58,12 +62,12 @@ void print_lanes(deque<Car> lanes[LANESIZE]) {
 }
 
 //This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
-void simulate(deque<Car> &deq) {
+void simulate(deque<Car> lanes[LANESIZE]) {
     int count = 1;
-    while (!deq.empty()) {
+    for (int i = 0; i < PERIODS; i++) {
         int r = rand() % 100;
-        //55% case
-        if (r < 55) {
+        //50% case
+        if (r < 50) {
             cout << endl << "Time: " << count << " Operation: Car paid: ";
             deq.front().print();
             deq.pop_front();
@@ -74,7 +78,7 @@ void simulate(deque<Car> &deq) {
             }
 
         }
-        //45% case
+        //50% case
         else {
             cout << endl << "Time: " << count << " Operation: Joined lane: ";
             deq.push_back(Car());
