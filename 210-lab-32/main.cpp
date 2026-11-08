@@ -26,21 +26,14 @@ int main() {
     
     //Outputs the initial que
     cout << "Initial queue: " << endl;
-    for (int j = 0; j < LANESIZE; j++) {
-        cout << "Lane " << j+1 << ":" << endl;
-        for (int i = 0; i < lanes[j].size(); i++) {
-            cout << "    ";
-            lanes[j][i].print();
-        }
+    print_lanes(lanes);
+   
+    cout << "Test operations on queue:  " << endl;
+    cout << "After taking one car away from every lane: " << endl;
+    for (int i = 0; i < LANESIZE; i++) {
+        lanes[i].pop_front();
     }
-    /*
-    for (int i = 0; i < SIZE; i++) {
-        cout << "    ";
-        myDeque[i].print();
-    }
-
-    simulate(myDeque);
-    */
+    print_lanes(lanes);
     return 0;
 }
 
@@ -57,7 +50,9 @@ void print_lanes(deque<Car> lanes[LANESIZE]) {
             }
         }
     }
+    cout << endl;
 }
+
 //This function distributes the probabilbity of either a car paying and leaving or a car joining as 55% and 45% respectively. It accomplishes this via a while loop and two branched possibilities.
 void simulate(deque<Car> &deq) {
     int count = 1;
