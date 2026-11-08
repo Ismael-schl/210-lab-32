@@ -10,6 +10,7 @@ using namespace std;
 const int SIZE = 2;
 const int LANESIZE = 4;
 
+const int PROPTOT = 100;
 const int PROBPAID = 46;
 const int PROBJOIN = 39;
 const int PERIODS  = 20;
@@ -68,22 +69,34 @@ void simulate(deque<Car> lanes[LANESIZE]) {
         int count = i+1;
         cout << endl << "Time: " << count << endl;
         for (int j = 0; j < LANESIZE; j++) {
-            int r = rand() % 100;
+            int r = rand() % PROPTOT;
             cout << "Lane: " << j+1;
-            //50 percent chance of payment
-            if (r < PROBPAID && !lanes[j].empty()) {
+            if (lanes[j].empty()) {
+                if (r < 50) {
+                    cout << " Joined: ";
+                    lanes[j].push_back(Car());
+                    lanes[j].back().print();
+                }
+                else {
+                    cout << "   Unaffected";
+                }
+            }
+            else {
+                if (r < PROBPAID) {
                 cout << " Paid: ";
                 lanes[j].front().print();
                 lanes[j].pop_front();
+                }
+                else if (r < PROBJOIN + PROBPAID) {
+                    cout << " Joined: ";
+                    lanes[j].push_back(Car());
+                    lanes[j].back().print();
+                }
+                else {
+                    cout << " Switched: ";
+
+                } 
             }
-            else if (r < PROBJOIN + PROBPAID) {
-                cout << " Joined: ";
-                lanes[j].push_back(Car());
-                lanes[j].back().print();
-            }
-            else {
-                
-            } 
         }
            
         print_lanes(lanes);
